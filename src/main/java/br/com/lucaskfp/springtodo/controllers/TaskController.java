@@ -33,7 +33,7 @@ public class TaskController {
 
     @PostMapping
     public ResponseEntity<Task> saveTask(@RequestBody Task task) {
-        return ResponseEntity.status(201).body(taskService.saveTask(task));
+        return ResponseEntity.created(null).body(taskService.saveTask(task));
     }
 
 }
