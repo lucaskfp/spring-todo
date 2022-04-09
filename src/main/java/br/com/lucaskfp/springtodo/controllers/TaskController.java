@@ -2,34 +2,38 @@ package br.com.lucaskfp.springtodo.controllers;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.lucaskfp.springtodo.models.Task;
-import br.com.lucaskfp.springtodo.services.TaskService;
+import br.com.lucaskfp.springtodo.services.task.TaskService;
+import lombok.RequiredArgsConstructor;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/tasks")
 public class TaskController {
 
-    @Autowired
-    TaskService taskService;
+    private final TaskService taskService;
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Task> getTask(@PathVariable("id") Integer id) {
+        return ResponseEntity.ok().body(taskService.getTask(id));
+    }
 
     @GetMapping
-    public List<Task> getTasks() {
-        return taskService.getTasks();
+    public ResponseEntity<List<Task>> getTasks() {
+        return ResponseEntity.ok().body(taskService.getTasks());
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Task createTask(@RequestBody Task body) {
-        return taskService.createTask(body);
+    public ResponseEntity<Task> saveTask(@RequestBody Task task) {
+        return ResponseEntity.status(201).body(taskService.saveTask(task));
     }
 
 }
