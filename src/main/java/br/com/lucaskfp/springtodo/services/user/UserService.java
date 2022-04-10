@@ -2,6 +2,7 @@ package br.com.lucaskfp.springtodo.services.user;
 
 import java.util.List;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 public class UserService implements IUser {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder encoder;
 
     @Override
     public User getUser(Integer id) {
@@ -33,6 +35,7 @@ public class UserService implements IUser {
     @Override
     public User saveUser(User user) {
         log.info("Save new user {} to the database", user.getName());
+        user.setPassword(encoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
