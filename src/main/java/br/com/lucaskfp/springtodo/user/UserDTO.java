@@ -1,6 +1,5 @@
-package br.com.lucaskfp.springtodo.dtos;
+package br.com.lucaskfp.springtodo.user;
 
-import br.com.lucaskfp.springtodo.models.User;
 import lombok.Data;
 
 @Data
@@ -10,7 +9,7 @@ public class UserDTO {
     private String name;
     private String email;
 
-    public UserDTO(User user) {
+    public UserDTO(UserEntity user) {
         this.id = user.getId();
         this.name = user.getName();
         this.email = user.getEmail();

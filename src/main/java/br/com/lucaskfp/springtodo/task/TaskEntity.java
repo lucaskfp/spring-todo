@@ -1,4 +1,4 @@
-package br.com.lucaskfp.springtodo.models;
+package br.com.lucaskfp.springtodo.task;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,32 +7,29 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
 
-import lombok.AllArgsConstructor;
+import br.com.lucaskfp.springtodo.collection.CollectionEntity;
 import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Data
 @Entity
-public class Collection {
+public class TaskEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column(nullable = false, length = 50, unique = true)
+    @Column(nullable = false)
+    @NotBlank(message = "O título é obrigatório")
     private String name;
 
     @Column(length = 255)
     private String description;
 
-    @Column(length = 30)
-    private String accentColor;
+    private Boolean done;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-
+    @JoinColumn(name = "collection_id", nullable = false)
+    private CollectionEntity collection;
 }

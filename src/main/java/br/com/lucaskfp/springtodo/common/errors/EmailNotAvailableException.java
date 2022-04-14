@@ -1,4 +1,4 @@
-package br.com.lucaskfp.springtodo.Exceptions;
+package br.com.lucaskfp.springtodo.common.errors;
 
 public class EmailNotAvailableException extends Exception {
 

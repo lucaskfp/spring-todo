@@ -1,4 +1,4 @@
-package br.com.lucaskfp.springtodo.models;
+package br.com.lucaskfp.springtodo.user;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,7 +12,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class User {
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

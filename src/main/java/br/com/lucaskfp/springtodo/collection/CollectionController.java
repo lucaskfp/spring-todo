@@ -1,4 +1,4 @@
-package br.com.lucaskfp.springtodo.controllers;
+package br.com.lucaskfp.springtodo.collection;
 
 import java.util.List;
 
@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.lucaskfp.springtodo.models.Collection;
-import br.com.lucaskfp.springtodo.services.collection.CollectionService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -20,12 +18,12 @@ public class CollectionController {
     private final CollectionService collectionService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Collection> getCollection(@PathVariable("id") Integer collectionId) {
+    public ResponseEntity<CollectionEntity> getCollection(@PathVariable("id") Integer collectionId) {
         return ResponseEntity.ok().body(collectionService.getCollection(collectionId));
     }
 
     @GetMapping
-    public ResponseEntity<List<Collection>> getCollections() {
+    public ResponseEntity<List<CollectionEntity>> getCollections() {
         return ResponseEntity.ok().body(collectionService.getCollections());
     }
 

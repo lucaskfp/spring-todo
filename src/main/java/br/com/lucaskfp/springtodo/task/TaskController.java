@@ -1,4 +1,4 @@
-package br.com.lucaskfp.springtodo.controllers;
+package br.com.lucaskfp.springtodo.task;
 
 import java.util.List;
 
@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.lucaskfp.springtodo.models.Task;
-import br.com.lucaskfp.springtodo.services.task.TaskService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -23,17 +21,17 @@ public class TaskController {
     private final TaskService taskService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Task> getTask(@PathVariable("id") Integer id) {
+    public ResponseEntity<TaskEntity> getTask(@PathVariable("id") Integer id) {
         return ResponseEntity.ok().body(taskService.getTask(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<Task>> getTasks() {
+    public ResponseEntity<List<TaskEntity>> getTasks() {
         return ResponseEntity.ok().body(taskService.getTasks());
     }
 
     @PostMapping
-    public ResponseEntity<Task> saveTask(@RequestBody Task task) {
+    public ResponseEntity<TaskEntity> saveTask(@RequestBody TaskEntity task) {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(taskService.saveTask(task));
     }
