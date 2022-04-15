@@ -1,5 +1,6 @@
-package br.com.lucaskfp.springtodo.user;
+package br.com.lucaskfp.springtodo.user.dtos;
 
+import br.com.lucaskfp.springtodo.user.UserEntity;
 import lombok.Data;
 
 @Data
