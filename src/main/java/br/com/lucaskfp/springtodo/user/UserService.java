@@ -15,16 +15,16 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public UserEntity getUser(Integer id) throws NotFoundException {
+    public UserEntity getUser(Integer id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
+                .orElseThrow(() -> new NotFoundException("O usuário não existe."));
     }
 
     public List<UserEntity> getUsers() {
         return userRepository.findAll();
     }
 
-    public UserEntity saveUser(UserEntity user) throws EmailNotAvailableException {
+    public UserEntity saveUser(UserEntity user) {
 
         UserEntity findEmail = userRepository.findByEmailEquals(user.getEmail()).orElse(null);
 

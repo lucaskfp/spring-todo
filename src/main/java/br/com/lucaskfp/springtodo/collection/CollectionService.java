@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import br.com.lucaskfp.springtodo.common.errors.NotFoundException;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -15,7 +16,8 @@ public class CollectionService {
 
     public CollectionEntity getCollection(Integer id) {
 
-        return collectionRepository.findById(id).get();
+        return collectionRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("A coleção não existe."));
     }
 
     public List<CollectionEntity> getCollections() {

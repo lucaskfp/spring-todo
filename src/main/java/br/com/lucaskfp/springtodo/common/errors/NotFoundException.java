@@ -1,6 +1,12 @@
 package br.com.lucaskfp.springtodo.common.errors;
 
-public class NotFoundException extends RuntimeException {
+import java.util.NoSuchElementException;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+@ResponseStatus(HttpStatus.NOT_FOUND)
+public class NotFoundException extends NoSuchElementException {
 
     public NotFoundException(String message) {
         super(message);
