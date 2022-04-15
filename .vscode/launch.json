@@ -5,7 +5,7 @@
             "name": "Spring Boot-SpringtodoApplication<springtodo>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
-            "console": "internalConsole",
+            // "console": "internalConsole",
             "mainClass": "br.com.lucaskfp.springtodo.SpringtodoApplication",
             "projectName": "springtodo",
             "args": "",

@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 
 import br.com.lucaskfp.springtodo.collection.CollectionEntity;
@@ -25,11 +26,13 @@ public class TaskEntity {
     private String name;
 
     @Column(length = 255)
+    @Max(255)
     private String description;
 
     private Boolean done;
 
     @ManyToOne
     @JoinColumn(name = "collection_id", nullable = false)
+    @NotBlank(message = "A coleção é obrigatória")
     private CollectionEntity collection;
 }

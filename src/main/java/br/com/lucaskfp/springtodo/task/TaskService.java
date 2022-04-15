@@ -8,21 +8,20 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-
 public class TaskService {
 
     private final TaskRepository taskRepository;
 
     public TaskEntity getTask(Integer id) {
-        return taskRepository.findById(id).get();
+        return this.taskRepository.findById(id).get();
     }
 
     public List<TaskEntity> getTasks() {
-        return taskRepository.findAll();
+        return this.taskRepository.findAll();
     }
 
     public TaskEntity saveTask(TaskEntity task) {
-        return taskRepository.save(task);
+        return this.taskRepository.save(task);
     }
 
 }
