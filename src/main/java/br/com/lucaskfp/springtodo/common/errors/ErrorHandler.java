@@ -22,13 +22,14 @@ public class ErrorHandler implements ErrorController {
     ErrorAttributes errorAttributes;
 
     @RequestMapping("/error")
-    public DefaultErrorResponse teste(WebRequest req) {
+    public DefaultErrorResponse errorHandler(WebRequest req) {
         Map<String, Object> attributes = errorAttributes.getErrorAttributes((WebRequest) req,
                 ErrorAttributeOptions.of(Include.MESSAGE, Include.BINDING_ERRORS));
 
         int code = (int) attributes.get("status");
         String message = (String) attributes.get("message");
         String path = (String) attributes.get("path");
+
         DefaultErrorResponse error = new DefaultErrorResponse(HttpStatus.valueOf(code), message, path);
 
         if (attributes.containsKey("errors")) {
