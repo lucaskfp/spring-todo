@@ -7,7 +7,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
+import br.com.lucaskfp.springtodo.user.validations.UniqueEmail;
 import lombok.Data;
 
 @Data
@@ -25,10 +27,12 @@ public class UserEntity {
     @Column(nullable = false, unique = true)
     @NotBlank(message = "O email é obrigatório")
     @Email(message = "Email inválido")
+    @UniqueEmail
     private String email;
 
     @Column(nullable = false)
     @NotBlank(message = "A senha é obrigatória")
+    @Size(min = 8, message = "A senha precisa ter no mínimo 8 caracteres")
     private String password;
 
 }
