@@ -2,7 +2,8 @@ package br.com.lucaskfp.springtodo.user;
 
 import java.util.List;
 
-import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.lucaskfp.springtodo.common.errors.NotFoundException;
@@ -13,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public UserEntity getUser(Integer id) {
         return this.userRepository.findById(id)
@@ -25,7 +27,7 @@ public class UserService {
 
     public UserEntity saveUser(UserEntity user) {
 
-        String pwHash = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+        String pwHash = this.passwordEncoder.encode(user.getPassword());
         user.setPassword(pwHash);
         userRepository.save(user);
 
