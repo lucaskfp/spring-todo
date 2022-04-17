@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +23,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/users")
+@CrossOrigin("*")
 public class UserController {
 
     private final UserService userService;
