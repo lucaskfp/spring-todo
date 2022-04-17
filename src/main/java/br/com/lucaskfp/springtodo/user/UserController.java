@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,6 +28,7 @@ public class UserController {
 
     @GetMapping("/{id}")
     @JsonView(View.Base.class)
+    @PreAuthorize("@userAuthorizationService.canGet(principal.user.id, #id)")
     public UserEntity getUser(@PathVariable("id") Integer id) {
         return this.userService.getUser(id);
     }
