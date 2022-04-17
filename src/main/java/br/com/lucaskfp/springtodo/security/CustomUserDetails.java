@@ -5,15 +5,16 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import br.com.lucaskfp.springtodo.user.UserEntity;
 import lombok.Data;
 
 @Data
 public class CustomUserDetails implements UserDetails {
-    UserEntity user;
+    private String email;
+    private int id;
 
-    public CustomUserDetails(UserEntity userEntity) {
-        this.user = userEntity;
+    public CustomUserDetails(String email, int id) {
+        this.email = email;
+        this.id = id;
     }
 
     @Override
@@ -23,12 +24,12 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return null;
     }
 
     @Override
     public String getUsername() {
-        return user.getEmail();
+        return this.email;
     }
 
     @Override
