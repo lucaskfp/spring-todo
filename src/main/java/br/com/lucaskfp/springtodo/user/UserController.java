@@ -1,15 +1,10 @@
 package br.com.lucaskfp.springtodo.user;
 
-import java.security.Principal;
-import java.util.List;
-
-import javax.security.auth.login.CredentialException;
 import javax.validation.Valid;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
