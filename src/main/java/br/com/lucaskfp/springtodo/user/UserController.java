@@ -37,7 +37,7 @@ public class UserController {
         return this.userService.getUsers();
     }
 
-    @PostMapping
+    @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
     @JsonView(View.Base.class)
     public UserEntity saveUser(@Valid @RequestBody UserEntity user) {
