@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import br.com.lucaskfp.springtodo.common.errors.NotFoundException;
+import br.com.lucaskfp.springtodo.user.UserEntity;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -24,7 +25,9 @@ public class CollectionService {
         return this.collectionRepository.findAll();
     }
 
-    public CollectionEntity saveCollection(CollectionEntity collection) {
+    public CollectionEntity saveCollection(CollectionEntity collection, UserEntity user) {
+
+        collection.setUser(user);
 
         return this.collectionRepository.save(collection);
     }
