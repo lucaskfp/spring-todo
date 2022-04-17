@@ -29,14 +29,15 @@ public class CollectionController {
 
     @GetMapping("/{id}")
     @JsonView(View.Base.class)
-    public CollectionEntity getCollection(@PathVariable("id") Integer collectionId) {
-        return this.collectionService.getCollection(collectionId);
+    public CollectionEntity getCollection(@PathVariable("id") Integer collectionId,
+            @LoggedInuser CustomUserDetails user) {
+        return this.collectionService.getCollection(collectionId, user.getId());
     }
 
     @GetMapping
     @JsonView(View.Base.class)
-    public List<CollectionEntity> getCollections() {
-        return this.collectionService.getCollections();
+    public List<CollectionEntity> getCollections(@LoggedInuser CustomUserDetails user) {
+        return this.collectionService.getCollections(user.getId());
     }
 
     @PostMapping
@@ -44,7 +45,7 @@ public class CollectionController {
     @JsonView(View.Base.class)
     public CollectionEntity saveCollection(@Valid @RequestBody CollectionEntity collection,
             @LoggedInuser CustomUserDetails user) {
-        return this.collectionService.saveCollection(collection, user.getUser());
+        return this.collectionService.saveCollection(collection, user.getId());
     }
 
 }
