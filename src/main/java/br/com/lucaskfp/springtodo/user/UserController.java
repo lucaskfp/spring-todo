@@ -1,7 +1,9 @@
 package br.com.lucaskfp.springtodo.user;
 
+import java.security.Principal;
 import java.util.List;
 
+import javax.security.auth.login.CredentialException;
 import javax.validation.Valid;
 
 import com.fasterxml.jackson.annotation.JsonView;
@@ -15,8 +17,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import br.com.lucaskfp.springtodo.common.View;
+import br.com.lucaskfp.springtodo.security.CustomUserDetails;
+import br.com.lucaskfp.springtodo.security.LoggedInuser;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -28,15 +33,14 @@ public class UserController {
 
     @GetMapping("/{id}")
     @JsonView(View.Base.class)
-    @PreAuthorize("@userAuthorizationService.canGet(principal.user.id, #id)")
-    public UserEntity getUser(@PathVariable("id") Integer id) {
-        return this.userService.getUser(id);
-    }
+    // @PreAuthorize("@userAuthorizationService.canGet(principal.id, #id)")
+    public UserEntity getUser(@PathVariable("id") Integer id, @LoggedInuser CustomUserDetails userDetails) {
 
-    @GetMapping
-    @JsonView(View.Base.class)
-    public List<UserEntity> getUsers() {
-        return this.userService.getUsers();
+        if (userDetails.getId() != id) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Não autorizado.");
+        }
+
+        return this.userService.getUser(id);
     }
 
     @PostMapping("/register")
