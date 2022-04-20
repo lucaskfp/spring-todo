@@ -2,7 +2,6 @@ package br.com.lucaskfp.springtodo.security;
 
 import java.io.IOException;
 
-import javax.security.auth.login.CredentialNotFoundException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
